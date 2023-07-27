@@ -1,0 +1,47 @@
+// basic windows window
+
+#include <Windows.h>
+#include <string>
+using namespace std;
+#include <iostream>
+
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+int main()
+{
+	cout << "I like pineapple pizza a lot ";
+
+	LPCWSTR className = TEXT("myWindowClass");
+	WNDCLASS wc = { 0 };
+	wc.lpfnWndProc = WindowProc;
+	wc.hInstance = GetModuleHandle(NULL);
+	wc.lpszClassName = className;
+	RegisterClass(&wc);
+
+	HWND hwnd = CreateWindowEx(
+		0,  //base window style  
+		className,
+		TEXT("Powdered_Window"),
+		WS_OVERLAPPEDWINDOW,  
+		CW_USEDEFAULT, CW_USEDEFAULT, 500, 500,
+		NULL,
+		NULL,
+		GetModuleHandle(NULL),
+		NULL
+	);
+
+	ShowWindow(hwnd, SW_SHOW);
+
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+
+	}
+
+	return 0;
+}
