@@ -1,0 +1,14 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string favSnack;
+	cout << "what is your favorite snack" << endl;
+	getline(cin, favSnack);
+
+	cout << "What a coincidence, I also like " << favSnack << endl;
+	cin.get();
+
+}
